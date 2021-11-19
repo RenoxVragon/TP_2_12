@@ -35,8 +35,8 @@ void print_main_menu()
 	cout << "3. Изменить абонента." << endl;
 	cout << "4. Показать телефонный список." << endl;
 	cout << "5. Найти абонента по номеру." << endl;
-	/*cout << "5. Сохранить объекты класса в файлы." << endl;
-	cout << "6. Загрузить объект класса из файла." << endl;*/
+	cout << "6. Сохранить объекты класса в файлы." << endl;
+	cout << "7. Загрузить объект класса из файла." << endl;
 	cout << "0. Завершить работу." << endl;
 }
 
@@ -45,6 +45,7 @@ Note n;
 void menu_selection(int number)
 {
 	system("cls");
+	int date[3];
 	int index = -1;
 	int flag = 1;
 	string str;
@@ -72,7 +73,20 @@ void menu_selection(int number)
 			cout << "Список пуст, нечего удалять." << endl;
 		break;
 	case 3:
-		cout << "пошел нахуй пока что" << endl;
+		if (keeper.get_size() > 0)
+		{
+			for (int i = 0; i < keeper.get_size(); i++)
+			{
+				cout << "Индекс объекта: " << i << endl;
+				keeper[i].print_info();
+				cout << "\n" << endl;
+			}
+			cout << "Выберите индекс объекта, который хотите изменить: " << endl;
+			index = process_choice(0, keeper.get_size() - 1);
+			keeper[index].change_info();
+		}
+		else
+			cout << "Список пуст, нечего удалять." << endl;
 		break;
 	case 4:
 		if (keeper.get_size() > 0)
@@ -120,6 +134,27 @@ void menu_selection(int number)
 		else
 			cout << "Список пуст, нечего искать." << endl;
 		break;
+	case 6:
+		if (keeper.get_size() > 0)
+		{
+			for (int i = 0; i < keeper.get_size(); i++)
+			{
+				keeper[i].file_save();
+			}
+		}
+		else
+			cout << "Список пустой." << endl;
+		break;
+	case 7:
+		n.file_load();
+		for (int i = 0; i < 3; i++)  date[i] = n.get_date(i);
+		if ((n.get_fio() == "") || (n.get_number() == "") || (date[0] == 0) || (date[1] == 0) || (date[2] == 0))
+		{
+			cout << "Не удалось загрузить данные." << endl;
+		}
+		else
+			keeper += n;
+		break;
 	case 0:
 		exit(0);
 		break;
@@ -137,7 +172,7 @@ int main()
 	while (1)
 	{
 		print_main_menu();
-		int choice = process_choice(0, 6);
+		int choice = process_choice(0, 7);
 		menu_selection(choice);
 	}
 }
