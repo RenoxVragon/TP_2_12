@@ -146,11 +146,13 @@
     <ClCompile Include="streamswork.cpp" />
     <ClCompile Include="task1.cpp" />
     <ClCompile Include="task2.cpp" />
+    <ClCompile Include="webfunc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="keeper.h" />
     <ClInclude Include="note.h" />
     <ClInclude Include="streamswork.h" />
+    <ClInclude Include="webfunc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
